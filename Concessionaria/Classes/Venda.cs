@@ -29,8 +29,24 @@ namespace ConcessionariaXCars.Classes
             Cliente = cliente;
             ValorDesconto = desconto;
             DataVenda = DateTime.Now;
+            NotaFiscal = GetNotaFiscal();
 
             return this;
+        }
+
+        public string GetNotaFiscal()
+        {
+            string caracteres = @"abcdefghijkklmnopqrstuvwxyz1234567890";
+
+            Random random = new Random();
+            string notaFiscal = caracteres[random.Next(35)].ToString() +
+                caracteres[random.Next(35)].ToString() +
+                caracteres[random.Next(35)].ToString() +
+                caracteres[random.Next(35)].ToString() +
+                caracteres[random.Next(35)].ToString() +
+                caracteres[random.Next(35)].ToString();
+
+            return notaFiscal;
         }
     }
 }

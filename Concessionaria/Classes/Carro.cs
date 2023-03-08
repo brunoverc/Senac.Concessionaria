@@ -27,6 +27,7 @@ namespace ConcessionariaXCars.Classes
             Tipo = tipo;
             Automatico = automatico;
             Motor = motor;
+
         }
 
         public int QuantidadePortas { get; private set; }

@@ -3,7 +3,7 @@ using ConcessionariaXCars.Enums;
 using System.Text;
 
 List<Veiculo> veiculos = new List<Veiculo>();
-List<Venda> veiculosVendidos = new List<Venda>();
+List<Venda> vendasFeitas = new List<Venda>();
 
 CarregarDados();
 
@@ -54,11 +54,12 @@ while (opcao != 0)
             var venda = new Venda().SetVenda(veiculo, cliente, desconto);
 
             //Colocar o veiculo na lista de vendas
-            veiculosVendidos.Add(venda);
+            vendasFeitas.Add(venda);
 
             veiculos.Remove(veiculo);
             break;
         case 3:
+            Console.WriteLine(GetVeiculosVendidos());
             break;
     }
 
@@ -125,7 +126,7 @@ static Cliente SetCliente()
     Console.WriteLine("Digite o logradouro do cliente");
     string logradouro = Console.ReadLine();
 
-    Console.WriteLine("Digite o logradouro do cliente");
+    Console.WriteLine("Digite o CEP do cliente");
     string cep = Console.ReadLine();
 
     Console.WriteLine("Digite o complemento do cliente");
@@ -147,4 +148,19 @@ static Cliente SetCliente()
     var cliente = new Cliente(nome, cpf, endereco, telefone);
 
     return cliente;
+}
+
+string GetVeiculosVendidos()
+{
+    StringBuilder sb = new StringBuilder();
+    sb.AppendLine("---------- Vendas ----------");
+    sb.AppendLine("Data venda \t\t\t Cliente \t Veículo \t Placa \t Valor");
+    
+    foreach(var venda in vendasFeitas)
+    {
+        sb.AppendLine($"{venda.DataVenda.ToShortDateString()}\t\t\t{venda.Cliente.Nome}\t\t" +
+            $"{venda.Veiculo.Modelo}\t\t{venda.Veiculo.Placa}\tR$ {venda.ValorVenda}");
+    }
+
+    return sb.ToString();
 }
